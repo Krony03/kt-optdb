@@ -1,5 +1,6 @@
 package data.service
 
+import data.model.CategoriesResponse
 import data.model.QuestionsResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -17,6 +18,9 @@ internal interface OpenTriviaAPI {
         @Query("difficulty") difficulty: String?,
         @Query("type") type: String?
     ): QuestionsResponse
+
+    @GET("api_category.php")
+    suspend fun getCategories(): CategoriesResponse
 }
 
 internal fun createOpenTriviaAPI(

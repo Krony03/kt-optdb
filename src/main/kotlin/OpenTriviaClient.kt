@@ -7,6 +7,14 @@ import domain.repository.OpenTriviaRepository
 import kotlinx.coroutines.flow.Flow
 import java.time.Duration
 
+/**
+ * This is the entrypoint for the OpenTrivia API consumer library for Kotlin.
+ * It provides a simple interface to some request of the [OpenTrivia API](https://opentdb.com/)
+ *
+ *
+ * @since 0.1.0-alpha
+ * @author Matheus Souza
+ */
 class OpenTriviaClient private constructor(
     private val timeout: Duration = DEFAULT_TIMEOUT
 ) {
@@ -41,7 +49,7 @@ class OpenTriviaClient private constructor(
         type: QuestionType? = null
     ): Flow<List<Question>> = repository.getQuestions(amount, categoryId, difficulty, type)
 
-    fun getCategories(): List<Category> = repository.getCategories()
+    fun getCategories(): Flow<List<Category>> = repository.getCategories()
 
     fun getQuestionTypes(): List<QuestionType> = repository.getQuestionTypes()
 
