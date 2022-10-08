@@ -2,10 +2,29 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.10"
+    `maven-publish`
 }
 
 group = "mfstech.showdown"
 version = "0.1.0-alpha"
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Krony03/kt-optdb")
+            credentials {
+                username = "Krony03"
+                password = System.getenv("PUBLISH_TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
+}
 
 repositories {
     mavenCentral()
