@@ -6,22 +6,14 @@ plugins {
 }
 
 group = "mfstech.showdown"
-version = "0.2.0-alpha"
+version = "1.0.0"
 
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Krony03/kt-optdb")
-            credentials {
-                username = "Krony03"
-                password = System.getenv("PUBLISH_TOKEN")
-            }
-        }
-    }
+publishing {   
     publications {
-        register<MavenPublication>("gpr") {
-            from(components["java"])
+        create<MavenPublication>("maven") {
+            groupId = "mfstech.showdown"
+            artifactId = "kt-optdb"
+            version = "1.0.0"
         }
     }
 }
@@ -37,7 +29,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
 
 tasks.test {
